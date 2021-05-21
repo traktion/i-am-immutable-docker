@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+
+  i-am-immutable:
+    image: harvesteye/harvester
+    environment:
+      SN_ADDR: 127.0.0.1:47269
+    ports:
+      - 8080:8080
+    depends_on:
+      - baby-fleming
