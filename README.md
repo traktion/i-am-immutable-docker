@@ -18,13 +18,17 @@ To run locally, start a local test network at 127.0.0.1:12305:
 You can either pull the latest image from Docker Hub and run it:
 
 `docker pull codiate/i-am-immutable:latest`
+
 Local (Linux hosts only, currently): `docker run --network host -t codiate/i-am-immutable:latest 127.0.0.1:12305`
+
 Remote (any platform hosts): `docker run --network host -t codiate/i-am-immutable:latest <Bootstrap IP:port>`
 
-Or build your own:
+Or build your own then run it:
 
 `docker build . -t i-am-immutable`
+
 Local (Linux hosts only, currently): `docker run --network host -t i-am-immutable 127.0.0.1:12305`
+
 Remote (any platform hosts): `docker run --network host -t i-am-immutable <Bootstrap IP:port>`
 
 ## Notes
