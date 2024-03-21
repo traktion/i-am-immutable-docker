@@ -1,20 +1,43 @@
+# Build SafeNetwork Docker container (inspired by DeusNexus image)
 FROM alpine:latest
+LABEL version="0.2"
+LABEL maintainer="Traktion"
+LABEL release-date="2024-03-21"
 
+# Update and install dependencies
 RUN apk update
+RUN apk add bash #unix shell to run install script
+RUN apk add curl #cUrl to transfer data
 
-RUN addgroup -S actix && adduser -S actix -G actix
-USER actix:actix
+RUN addgroup -S safe && adduser -S safe -G safe
+USER safe:safe
+WORKDIR /home/safe
 
-ENV PATH=$PATH:/home/actix/bin
-WORKDIR /home/actix
+#Make profile file with exported PATH and refresh the shell (while building)
+SHELL ["/bin/bash", "--login", "-c"]
+RUN echo 'export PATH=$PATH:/home/safe/.local/bin' > ~/.profile && source ~/.profile
 
-COPY ./sn_httpd /home/actix/bin/sn_httpd
-COPY ./static /home/actix/static
+#Set ENV PATH (after build will be used to find 'safe' and 'safenode')
+ENV PATH=$PATH:/home/safe/.local/bin/
+
+#Installation Script - MaidSafe installation script
+RUN curl -sSL https://raw.githubusercontent.com/maidsafe/safeup/main/install.sh | bash
+
+#Install Safe - During Build
+RUN safeup client
+RUN safeup update
+
+#Install sn_httpd
+COPY sn_httpd/sn_httpd /home/safe/.local/bin/sn_httpd
+COPY sn_httpd/static /home/safe/static
+COPY sn_httpd/sn_httpd_wrapper.sh /home/safe/.local/bin/sn_httpd_wrapper.sh
 
 USER root:root
-RUN chmod +x /home/actix/bin/sn_httpd
+RUN chmod +x /home/safe/.local/bin/sn_httpd
+RUN chmod +x /home/safe/.local/bin/sn_httpd_wrapper.sh
+USER safe:safe
 
 VOLUME ["/tmp"]
 
-ENTRYPOINT ["sn_httpd","0.0.0.0:8080","static"]
+ENTRYPOINT ["sn_httpd_wrapper.sh"]
 EXPOSE 8080
