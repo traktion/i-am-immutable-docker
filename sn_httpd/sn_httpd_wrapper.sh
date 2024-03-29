@@ -6,6 +6,6 @@ else
   export NETWORK_CONTACT=$1;
 fi
 
-safe wallet get-faucet 178.128.175.208:8000
+safe wallet get-faucet 188.166.171.13:8000
 
 sn_httpd 0.0.0.0:8080 static $NETWORK_CONTACT
