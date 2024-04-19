@@ -6,6 +6,12 @@ else
   export NETWORK_CONTACT=$1;
 fi
 
+if [ -z $2 ]; then
+  export DNS_REGISTER="6d70bf50aec7ebb0f1b9ff5a98e2be2f9deb2017515a28d6aea0c6f80a9f44dd8f1cddbfbd2d975b19912dfd01e3c02077470177455a47814002d5a0f30e886720cc892a3b31f69bf4dae3d2d455fe21";
+else
+  export DNS_REGISTER=$2;
+fi
+
 safe wallet get-faucet 188.166.171.13:8000
 
-sn_httpd 0.0.0.0:8080 static $NETWORK_CONTACT
+sn_httpd 0.0.0.0:8080 static $NETWORK_CONTACT $DNS_REGISTER
