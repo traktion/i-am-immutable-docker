@@ -12,6 +12,7 @@ else
   export DNS_REGISTER=$2;
 fi
 
-safe wallet get-faucet 188.166.171.13:8000
+export SAFE_PEERS=/ip4/209.209.9.143/udp/4748/quic-v1/p2p/12D3KooWMQ8HJdgUmJvyT3WoGWb6RmadswniAQrsm7uZ3sKdpVsT
+safe wallet get-faucet 52.213.146.192:8000
 
 sn_httpd 0.0.0.0:8080 static $NETWORK_CONTACT $DNS_REGISTER
