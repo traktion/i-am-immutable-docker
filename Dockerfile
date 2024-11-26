@@ -25,10 +25,6 @@ ENV PATH=$PATH:/home/safe/.local/bin/
 #Installation Script - MaidSafe installation script
 RUN curl -sSL https://raw.githubusercontent.com/maidsafe/safeup/main/install.sh | bash
 
-#Install Safe - During Build
-RUN safeup client
-RUN safeup update
-
 #Install sn_httpd
 COPY sn_httpd/sn_httpd /home/safe/.local/bin/sn_httpd
 COPY sn_httpd/static /home/safe/static

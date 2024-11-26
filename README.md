@@ -1,29 +1,22 @@
-# i-am-immutable-docker
+# sn-httpd-docker
 
 ## What is this?
 
-I am IMMUTABLE blog app hosted in a web container.
-
-I am IMMUTABLE app: https://github.com/traktion/i-am-immutable-client
 sn_httpd web container: https://github.com/traktion/sn_httpd
 
 ## Configuration
 
 You can either pull the latest image from Docker Hub:
 
-`docker pull traktion/i-am-immutable:latest`
+`docker pull traktion/sn_httpd:latest`
 
 Or build your own:
 
-`docker build -t traktion/i-am-immutable .`
+`docker build -t traktion/sn_httpd .`
 
-Then run using a Maidsafe remote node:
+Then run with:
 
-`docker run -p 127.0.0.1:8080:8080 traktion/i-am-immutable`
-
-Or run using any node's quic URL:
-
-`docker run -p 127.0.0.1:8080:8080 traktion/i-am-immutable /ip4/144.126.202.104/udp/51231/quic-v1/p2p/12D3KooWRmRtGAN2P2SW4uVpug6cc4wZ7GemTXTFvb9PC7LxXEWS`
+`docker run -p 0.0.0.0:8080:8080 traktion/sn_httpd`
 
 ## Notes
 
