@@ -7,7 +7,7 @@ else
 fi
 
 if [ -z $2 ]; then
-  export DNS_REGISTER="6d70bf50aec7ebb0f1b9ff5a98e2be2f9deb2017515a28d6aea0c6f80a9f44dda43d61a01fd64bc32265b41842ad4c8ef51b22748de068f550e39ebf88495a3e99c4481019d10ad513d0157fb2e679b3";
+  export DNS_REGISTER="6d70bf50aec7ebb0f1b9ff5a98e2be2f9deb2017515a28d6aea0c6f80a9f44dd80633b8c86c8c01bea9fde36344bd2461c72bdc8ef02273c647436a55e0ef84b850dd45c14bddfbe1c35b405c6213f5b";
 else
   export DNS_REGISTER=$2;
 fi
@@ -16,6 +16,6 @@ fi
 #safe wallet get-faucet 209.97.185.196:8000
 
 # silence logs
-export RUST_LOG="info,sn_httpd=info,sn_api=warn,sn_client=warn,sn_networking=off"
+export RUST_LOG="info,sn_httpd=info,ant_api=warn,ant_client=warn,ant_networking=off,ant_bootstrap=error"
 
 sn_httpd 0.0.0.0:8080 static $NETWORK_CONTACT $DNS_REGISTER
