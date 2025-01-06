@@ -7,7 +7,7 @@ else
 fi
 
 if [ -z $2 ]; then
-  export DNS_REGISTER="6d8e2391a481c03c3bc988ed71d9be12cfd0e437d08d17e6aee4542bfbea950680633b8c86c8c01bea9fde36344bd2461c72bdc8ef02273c647436a55e0ef84b850dd45c14bddfbe1c35b405c6213f5b";
+  export DNS_REGISTER="aaf018d4fe93ae713c7bcfa97394af13d68ea47c7e9b5c116dbe8cb1b8022bf080633b8c86c8c01bea9fde36344bd2461c72bdc8ef02273c647436a55e0ef84b850dd45c14bddfbe1c35b405c6213f5b";
 else
   export DNS_REGISTER=$2;
 fi
