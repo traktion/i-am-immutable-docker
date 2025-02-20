@@ -25,17 +25,22 @@ ENV PATH=$PATH:/home/safe/.local/bin/
 #Installation Script - MaidSafe installation script
 RUN curl -sSL https://raw.githubusercontent.com/maidsafe/safeup/main/install.sh | bash
 
-#Install sn_httpd
-COPY sn_httpd/sn_httpd /home/safe/.local/bin/sn_httpd
-COPY sn_httpd/static /home/safe/static
-COPY sn_httpd/sn_httpd_wrapper.sh /home/safe/.local/bin/sn_httpd_wrapper.sh
+#Install anttp
+COPY anttp/anttp /home/safe/.local/bin/anttp
+COPY anttp/static /home/safe/static
+COPY anttp/cache /home/safe/cache
+COPY anttp/anttp_wrapper.sh /home/safe/.local/bin/anttp_wrapper.sh
 
 USER root:root
-RUN chmod +x /home/safe/.local/bin/sn_httpd
-RUN chmod +x /home/safe/.local/bin/sn_httpd_wrapper.sh
+RUN chown safe:safe /home/safe/cache
+RUN chmod 777 /home/safe/cache
+RUN chmod +x /home/safe/.local/bin/anttp
+RUN chmod +x /home/safe/.local/bin/anttp_wrapper.sh
 USER safe:safe
 
 VOLUME ["/tmp"]
 
-ENTRYPOINT ["sn_httpd_wrapper.sh"]
+#todo: move cache to /tmp volume
+
+ENTRYPOINT ["anttp_wrapper.sh"]
 EXPOSE 8080
